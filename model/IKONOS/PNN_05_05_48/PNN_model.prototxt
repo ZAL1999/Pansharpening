@@ -1,0 +1,78 @@
+name: "PNN"
+input: "data"
+input_dim: 1
+input_dim: 5
+input_dim: 33
+input_dim: 33
+layers {
+  name: "conv1"
+  type: CONVOLUTION
+  bottom: "data"
+  top: "conv1"
+  convolution_param {
+    num_output: 48
+    kernel_size: 5
+    stride: 1
+    pad: 0
+    weight_filler {
+      type: "gaussian"
+      std: 0.001
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layers {
+  name: "relu1"
+  type: RELU
+  bottom: "conv1"
+  top: "conv1x"
+}
+layers {
+  name: "conv2"
+  type: CONVOLUTION
+  bottom: "conv1x"
+  top: "conv2"
+  convolution_param {
+    num_output: 32
+    kernel_size: 5
+    stride: 1
+    pad: 0
+    weight_filler {
+      type: "gaussian"
+      std: 0.001
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layers {
+  name: "relu2"
+  type: RELU
+  bottom: "conv2"
+  top: "conv2x"
+}
+layers {
+  name: "conv3"
+  type: CONVOLUTION
+  bottom: "conv2x"
+  top: "conv3"
+  convolution_param {
+    num_output: 4
+    kernel_size: 5
+    stride: 1
+    pad: 0
+    weight_filler {
+      type: "gaussian"
+      std: 0.001
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
